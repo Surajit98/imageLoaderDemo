@@ -19,14 +19,12 @@ class PhotosRepository(
             if (response.status == ApiResult.Status.SUCCESS) {
                 if (response.data?.stat == "ok") {
                     emit(ApiResult.success(response.data))
-                } else if (response.status == ApiResult.Status.ERROR) {
-                    emit(ApiResult.error(response.message!!))
-
+                } else {
+                    emit(ApiResult.error("Error loading images",null))
                 }
-
-            } else {
-                emit(ApiResult.error(response.message!!, null))
-
+            } else if (response.status == ApiResult.Status.ERROR) {
+                emit(ApiResult.error(response.message!!))
             }
+
         }
 }

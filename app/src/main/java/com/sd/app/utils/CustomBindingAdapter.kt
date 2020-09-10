@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
+import com.sd.app.R
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import org.koin.core.KoinComponent
@@ -13,17 +14,19 @@ object CustomBindingAdapter : KoinComponent {
 
     var picasso: Picasso = get()
 
+    @JvmStatic
     @BindingAdapter(value = ["url", "progressBar"])
     fun loadImage(view: ImageView?, url: String?, progressBar: ProgressBar) {
         url?.apply {
             progressBar.visibility = View.VISIBLE
-            picasso.load(this).into(view, object : Callback {
+            picasso.load(this).error(R.mipmap.not_available).into(view, object : Callback {
                 override fun onSuccess() {
                     progressBar.visibility = View.GONE
                 }
 
                 override fun onError(e: Exception) {
                     progressBar.visibility = View.GONE
+
                 }
             })
         }

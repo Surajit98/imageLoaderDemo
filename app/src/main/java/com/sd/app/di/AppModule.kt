@@ -14,21 +14,15 @@ var appModule = module {
 
     fun provideConnectivityUtil(context: Context) = ConnectivityUtil(context)
 
-    fun getPicassoDownloader(okHttpClient: OkHttpClient): OkHttp3Downloader {
-        return OkHttp3Downloader(okHttpClient)
-    }
 
-    fun getPicasso(context: Context, downloader: OkHttp3Downloader): Picasso {
+    fun getPicasso(context: Context): Picasso {
         return Picasso.Builder(context)
-            .downloader(downloader)
-            .indicatorsEnabled(true)
             .loggingEnabled(true)
             .build()
 
     }
 
     single { provideConnectivityUtil(get()) }
-    single { getPicassoDownloader(get()) }
-    single { getPicasso(get(), get()) }
+    single { getPicasso(get()) }
 
 }

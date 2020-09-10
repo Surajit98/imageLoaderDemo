@@ -1,9 +1,10 @@
 package com.sd.app.ui.photo_activity
 
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class LoadMoreListener(private val layoutManager: LinearLayoutManager) :
+abstract class LoadMoreListener(private val layoutManager: GridLayoutManager) :
     RecyclerView.OnScrollListener() {
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
